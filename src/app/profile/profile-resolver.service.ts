@@ -1,8 +1,9 @@
-import { Injectable, } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-
+import { catchError } from 'rxjs/operators';
 import { Profile, ProfilesService } from '../shared';
+
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class ProfileResolver implements Resolve<Profile> {
   ): Observable<any> {
 
     return this.profilesService.get(route.params['username'])
-           .catch((err) => this.router.navigateByUrl('/'));
+           .pipe(catchError((err) => this.router.navigateByUrl('/')));
 
   }
 }

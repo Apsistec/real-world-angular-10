@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { map, catchError } from 'rxjs/operators';
 import { Article, ArticlesService, UserService } from '../shared';
+
 
 @Injectable()
 export class EditableArticleResolver implements Resolve<Article> {
@@ -29,7 +29,7 @@ export class EditableArticleResolver implements Resolve<Article> {
 
              }
            ))
-           .catch((err) => this.router.navigateByUrl('/'));
+           .pipe(catchError((err) => this.router.navigateByUrl('/')));
 
   }
 }

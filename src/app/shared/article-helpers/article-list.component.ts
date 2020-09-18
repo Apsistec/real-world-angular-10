@@ -26,7 +26,8 @@ export class ArticleListComponent {
   results: Article[];
   loading = false;
   currentPage = 1;
-  totalPages: Array<number> = [1];
+  totalPages: number | number[];
+  // Array<number> = [1];
 
   setPageTo(pageNumber) {
     this.currentPage = pageNumber;

@@ -1,10 +1,13 @@
-import { Injectable, } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-
+import { catchError } from 'rxjs/operators';
 import { Article, ArticlesService, UserService } from '../shared';
 
-@Injectable()
+
+@Injectable({
+  providedIn: 'root',
+})
 export class ArticleResolver implements Resolve<Article> {
   constructor(
     private articlesService: ArticlesService,
@@ -18,7 +21,7 @@ export class ArticleResolver implements Resolve<Article> {
   ): Observable<any> {
 
     return this.articlesService.get(route.params['slug'])
-           .catch((err) => this.router.navigateByUrl('/'));
+           .pipe(catchError((err) => this.router.navigateByUrl('/')));
 
   }
 }

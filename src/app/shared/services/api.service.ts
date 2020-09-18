@@ -34,23 +34,23 @@ export class ApiService {
      return Observable.throw(error.json());
   }
 
-  get(path: string): Observable<any> {
-    return this.http.get(`${environment.api_url}${path}`, { headers: this.setHeaders() })
+  get(path: string, params?: HttpParams): Observable<any> {
+    return this.http.get(`${environment.api_url}${path}`, { headers: this.setHeaders(), params })
     .pipe(catchError(this.formatErrors))
     // .pipe(map((res: HttpEvent) => res.json()));
   }
-  put(path: string): Observable<any> {
-    return this.http.put(`${environment.api_url}${path}`, { headers: this.setHeaders(), responseType: 'json' })
+  put(path: string, params?: HttpParams): Observable<any> {
+    return this.http.put(`${environment.api_url}${path}`, { headers: this.setHeaders(), responseType: 'json', params})
     .pipe(catchError(this.formatErrors))
     // .pipe(map((res: HttpEvent) => res.json()));
   }
-  post(path: string): Observable<any> {
-    return this.http.post(`${environment.api_url}${path}`, { headers: this.setHeaders(), responseType: 'json' })
+  post(path: string, params?: HttpParams): Observable<any> {
+    return this.http.post(`${environment.api_url}${path}`, { headers: this.setHeaders(), responseType: 'json', params })
     .pipe(catchError(this.formatErrors))
     // .pipe(map((res: HttpEvent) => res.json()));
   }
-  delete(path: string): Observable<any> {
-    return this.http.delete(`${environment.api_url}${path}`, { headers: this.setHeaders() })
+  delete(path: string, params?: HttpParams): Observable<any> {
+    return this.http.delete(`${environment.api_url}${path}`, { headers: this.setHeaders(), params })
     .pipe(catchError(this.formatErrors))
     // .pipe(map((res: HttpEvent) => res.json()));
   }
